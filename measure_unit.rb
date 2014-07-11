@@ -1,9 +1,13 @@
 module UnitConversion
+  # Base units:
+  # Length - meter
+  # Weight - gramm
   CONVERSION_RATES = {
       :meters => 1, :feets => 3.2808399, :inches => 39.3700787, :centimeters => 100,
       :pounds => 0.00220462262, :gramms => 1, :kilograms => 0.001, :ounces => 0.0352739619,
   }
 
+  # To check type mismatch
   UNIT_TYPES = {
       :meters => :length, :feets => :length, :inches => :length, :centimeters => :length,
       :pounds => :weight, :gramms => :weight, :kilograms => :weight, :ounces => :weight
@@ -14,6 +18,7 @@ module UnitConversion
     UNIT_TYPES.keys.each do |type|
       # add method for convert numbers into measure units
       define_method type do
+        # Convert to MeasureUnit with base type
         MeasureUnit.new(self / CONVERSION_RATES[type.to_sym], type.to_sym)
       end
     end
